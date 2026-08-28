@@ -262,6 +262,18 @@
             text-align: center;
         }
 
+        .download-status {
+            display: none;
+            color: #22c55e;
+            font-size: 14px;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .download-status.show {
+            display: block;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 30px 20px;
@@ -329,7 +341,11 @@
 
     <!-- Download -->
     <div class="download-section">
-        <a href="#" class="download-btn" id="downloadBtn">
+        <a href="https://github.com/saidanimelek26/AT_om_sabri/releases/download/omsabria/atomsabri.exe" 
+           class="download-btn" 
+           id="downloadBtn"
+           target="_blank"
+           rel="noopener noreferrer">
             <span>📥</span>
             تحميل الأداة
             <span class="arrow">←</span>
@@ -338,6 +354,9 @@
             الإصدار <span>v2.0.0</span> • حجم الملف <span>~35 MB</span>
         </div>
         <div class="update-badge">🔄 يتم التحديث يومياً</div>
+        <div class="download-status" id="downloadStatus">
+            ✅ جاري التحميل... يرجى الانتظار
+        </div>
     </div>
 
     <!-- Note -->
@@ -364,9 +383,20 @@
 
 <script>
     document.getElementById('downloadBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('جاري تحميل الأداة...\nسيتم توجيهك إلى رابط التحميل قريباً');
-        // window.location.href = 'https://github.com/saidanimelek26/AT_om_sabri/releases/download/omsabria/atomsabri.exe';
+        // Show loading status
+        const status = document.getElementById('downloadStatus');
+        status.classList.add('show');
+        status.textContent = '⏳ جاري التحميل... يرجى الانتظار';
+        status.style.color = '#fbbf24';
+        
+        // Change button text
+        this.innerHTML = '<span>⏳</span> جاري التحميل... <span class="arrow">←</span>';
+        
+        // After 3 seconds, show success
+        setTimeout(function() {
+            status.textContent = '✅ تم بدء التحميل!';
+            status.style.color = '#22c55e';
+        }, 3000);
     });
 </script>
 
